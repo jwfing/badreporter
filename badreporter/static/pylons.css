@@ -1,5 +1,5 @@
-html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;/* 16px */
-vertical-align:baseline;background:transparent;}
+html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,font,img,ins,kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,b,u,i,center,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td{margin:0;padding:0;border:0;outline:0;font-size:100%;}
+
 body{line-height:1;}
 ol,ul{list-style:none;}
 blockquote,q{quotes:none;}
@@ -39,18 +39,18 @@ body h6{font-family:"NeutonRegular","Lucida Grande",Lucida,Verdana,sans-serif;fo
 .header,.footer{width:750px;margin-right:auto;margin-left:auto;}
 .wrapper{width:100%}
 #top,#top-small,#bottom{width:100%;}
-#top{color:#000000;height:230px;background:#ffffff url(headerbg.png) repeat-x 0 top;position:relative;}
+#top{color:#000000;height:80px;background:#ffffff repeat-x 0 top;position:relative;}
 #top-small{color:#000000;height:60px;background:#ffffff url(headerbg.png) repeat-x 0 top;position:relative;}
 #bottom{color:#222;background-color:#ffffff;}
-.top,.top-small,.middle,.bottom{width:750px;margin-right:auto;margin-left:auto;}
+.top,.top-small,.middle,.bottom{width:100%;margin-right:auto;margin-left:auto;}
 .top{padding-top:40px;}
 .top-small{padding-top:10px;}
 #middle{width:100%;height:100px;background:url(middlebg.png) repeat-x;border-top:2px solid #ffffff;border-bottom:2px solid #b2b2b2;}
 .app-welcome{margin-top:25px;}
 .app-name{color:#000000;font-weight:bold;}
-.bottom{padding-top:50px;}
-#left{width:350px;float:left;padding-right:25px;}
-#right{width:350px;float:right;padding-left:25px;}
+.bottom{padding-top:10px;}
+#left{width:15%;float:left;padding-right:5px;}
+#right{width:80%;float:right;padding-left:5px;}
 .align-left{text-align:left;}
 .align-right{text-align:right;}
 .align-center{text-align:center;}
@@ -59,7 +59,8 @@ ul.links li{list-style-type:none;font-size:14px;}
 form{border-style:none;}
 fieldset{border-style:none;}
 input{color:#222;border:1px solid #ccc;font-family:sans-serif;font-size:12px;line-height:16px;}
-input[type=text],input[type=password]{width:205px;}
+input[type=text]{width:700px;}
+input[type=password]{width:205px;}
 input[type=submit]{background-color:#ddd;font-weight:bold;}
 /*Opera Fix*/
 body:before{content:"";height:100%;float:left;width:0;margin-top:-32767px;}

@@ -11,14 +11,14 @@ from pyramid.paster import (
 
 from ..models import (
     DBSession,
-    MyModel,
+    BadCase,
     Base,
     )
 
 def usage(argv):
     cmd = os.path.basename(argv[0])
     print('usage: %s <config_uri>\n'
-          '(example: "%s development.ini")' % (cmd, cmd)) 
+          '(example: "%s development.ini")' % (cmd, cmd))
     sys.exit(1)
 
 def main(argv=sys.argv):
@@ -31,5 +31,8 @@ def main(argv=sys.argv):
     DBSession.configure(bind=engine)
     Base.metadata.create_all(engine)
     with transaction.manager:
-        model = MyModel(name='one', value=1)
+        model = BadCase(url='one')
         DBSession.add(model)
+
+if __name__ == "__main__":
+    main()

@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+  <title>The Pyramid Web Application Development Framework</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+  <link rel="shortcut icon" href="${request.static_url('badreporter:static/favicon.ico')}" />
+  <link rel="stylesheet" href="${request.static_url('badreporter:static/pylons.css')}" type="text/css" media="screen" charset="utf-8" />
+</head>
+<body>
+  <div id="wrap">
+    <div id="top">
+      <div class="align-left">
+        <div><img src="${request.static_url('badreporter:static/avos.gif')}" width="240" height="70" alt="pyramid"/>
+         Welcome to <span class="app-name">BadCase Report Platform</span></div>
+      </div>
+    </div>
+    <div id="bottom">
+      <div class="bottom">
+        <div id="left" class="align-right">
+            <h2><A href="/">List All</A></h2>
+            <h2><A href="/report">Report Issue</A></h2>
+        </div>
+        <div id="right" class="align-left">
+          <form action="/report" method="post">
+              <table width="80%">
+                  <tr><td width="20%" align="right">Bad Link Url:&nbsp;</td>
+                      <td width="80%"><input name="url" maxlength=1024 size=100 type="text"></td>
+                  </tr>
+                  <tr vertical_align="top">
+                      <td width="20%" align="right">Reason / Description:&nbsp;</td>
+                      <td width="80%"><textarea name="desc" rows="5" cols=100></textarea></td>
+                  </tr>
+                  <tr>
+                      <td></td>
+                      <td><input type="submit" name="form_submitted" value="提交"></td>
+                  </tr>
+              </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="footer">&copy; Copyright 2008-2011, Agendaless Consulting.</div>
+  </div>
+</body>
+</html>

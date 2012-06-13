@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
+<head>
+  <title>Fetcher BadCase Aggregator</title>
+  <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
+  <link rel="shortcut icon" href="${request.static_url('badreporter:static/favicon.ico')}" />
+  <link rel="stylesheet" href="${request.static_url('badreporter:static/pylons.css')}" type="text/css" media="screen" charset="utf-8" />
+  <!--[if lte IE 6]>
+  <link rel="stylesheet" href="${request.static_url('badreporter:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
+  <![endif]-->
+</head>
+<body>
+    <script language="JavaScript">
+        var badcases = ${badcases};
+        var resultLen = badcases.length;
+        var offset = ${offset};
+        var limit = ${limit};
+        var status;
+        function refresh() {
+            status = document.getElementById('caseType').value;
+            var newUrl = "/?offset=" + offset + "&limit=" + limit + "&status=" + status;
+            window.alert(newUrl);
+            window.location.href = newUrl;
+            window.location.reload();
+        }
+        function nextPage() {
+        }
+        function prevPage() {
+        }
+        function closeCases() {
+        }
+        function reopenCases() {
+        }
+        function checkSelectedItems() {
+        }
+  </script>
+  <div id="wrap">
+    <div id="top">
+      <div class="align-left">
+        <div><img src="${request.static_url('badreporter:static/avos.gif')}" width="240" height="70" alt="pyramid"/>
+         Welcome to <span class="app-name">BadCase Reporter Platform</span></div>
+      </div>
+    </div>
+    <div id="bottom">
+      <div class="bottom">
+        <div id="left" class="align-right">
+            <h2><A href="/">List All</A></h2>
+            <h2><A href="/report">Report Issue</A></h2>
+        </div>
+        <div id="right" class="align-left">
+            <div id="toolbar">
+            <select id="caseType">
+                <option value="all">All</option>
+                <option value="A">Active</option>
+                <option value="C">Closed</option>
+            </select>
+            <button type="button" onclick="JavaScript:refresh()">Refresh</button>
+
+            <button type="button" onclick="JavaScript:closeCases()">Close Cases</button>
+            
+            <button type="button" onclick="JavaScript:reopenCases()">Reopen Cases</button>
+            
+            <script language="JavaScript">
+                if (offset > 0) {
+                    document.writeln("<a href='*' onclick='JavaScript:prevPage()'>PrevPage</a>");
+                }
+                if (resultLen >= limit) {
+                    document.writeln("<a href='*' onclick='JavaScript:nextPage()'>NextPage</a>");
+                }
+            </script>
+        </div>
+        <div>
+            <table border='1' width='80%'>
+                <tr>
+                    <th width='5%'></th>
+                    <th width='30%'>Url</th>
+                    <th width='25%'>Description</th>
+                    <th width='17%'>CreateTime</th>
+                    <th width='17%'>UpdateTime</th>
+                    <th width='5%'>Status</th>
+                </tr>
+                <script language="JavaScript">
+                    var badcase;
+                    for (i = 0; i < resultLen; i++) {
+                        badcase = badcases.pop(0);
+                        item = JSON.parse(badcase);
+                        if ((i % 2) === 0) {
+                            document.write("<tr bgcolor='silver'>");
+                        } else {
+                            document.write("<tr>");
+                        }
+                        document.writeln("<td><input type='checkbox' id='modifySelected'/></td><td>" + item["url"] + "</td><td>" + item["description"]
+                                + "</td><td>" + item["createTime"] + "</td><td>" + item["updateTime"]
+                                + "</td><td>" + item["status"] + "</td></tr>");
+                    }
+                </script>
+            </table>
+        </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div id="footer">
+    <div class="footer">&copy; Copyright 2008-2011, Agendaless Consulting.</div>
+  </div>
+</body>
+</html>
