@@ -1,5 +1,4 @@
 from datetime import datetime, date, time
-
 from sqlalchemy import (
     Column,
     Integer,
@@ -59,7 +58,7 @@ def listAllCases(offset, limit, status):
         query = DBSession.query(BadCase).filter(BadCase.status==status)
     else:
         query = DBSession.query(BadCase)
-    return query.all()
+    return query.order_by("updateTime desc")[int(offset):int(limit) + int(offset)]
 
 def getCaseById(id):
     return DBSession.query(BadCase).filter(BadCase.id==id).first()

@@ -20,9 +20,8 @@ from .models import (
 @view_config(route_name='home', renderer='templates/homepage.pt')
 def home_view(request):
     offset = request.params.get('offset', 0)
-    limit = request.params.get('limit', 20)
-    status = request.params.get('status', '')
-    print "%s %s %s" % (offset, limit, status)
+    limit = request.params.get('limit', 10)
+    status = request.params.get('status', 'all')
     cases = listAllCases(offset, limit, status)
 
     caseStrList = []

@@ -22,10 +22,17 @@
             window.location.href = newUrl;
         }
         function nextPage() {
-            window.alert('go to next page');
+            offset += limit;
+            var newUrl = "/?offset=" + offset + "&limit=" + limit + "&status=" + status;
+            window.location.href = newUrl;
         }
         function prevPage() {
-            window.alert('go to prev page');
+            offset -= limit;
+            if (offset < 0) {
+                offset = 0;
+            }
+            var newUrl = "/?offset=" + offset + "&limit=" + limit + "&status=" + status;
+            window.location.href = newUrl;
         }
         function closeCases() {
             var idList = checkSelectedItems();
@@ -82,10 +89,10 @@
             
             <script language="JavaScript">
                 if (offset > 0) {
-                    document.writeln("<a href='*' onclick='JavaScript:prevPage()'>PrevPage</a>");
+                    document.writeln("<a href='#' onclick='JavaScript:prevPage()'>PrevPage</a>");
                 }
                 if (resultLen >= limit) {
-                    document.writeln("<a href='*' onclick='JavaScript:nextPage()'>NextPage</a>");
+                    document.writeln("<a href='#' onclick='JavaScript:nextPage()'>NextPage</a>");
                 }
             </script>
         </div>
