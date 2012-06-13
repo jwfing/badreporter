@@ -19,19 +19,39 @@
         function refresh() {
             status = document.getElementById('caseType').value;
             var newUrl = "/?offset=" + offset + "&limit=" + limit + "&status=" + status;
-            window.alert(newUrl);
             window.location.href = newUrl;
-            window.location.reload();
         }
         function nextPage() {
+            window.alert('go to next page');
         }
         function prevPage() {
+            window.alert('go to prev page');
         }
         function closeCases() {
+            var idList = checkSelectedItems();
+            if (idList === "") {
+                window.alert("please selected badcase at first!");
+            } else {
+                window.alert("selected items:" + idList);
+            }
         }
         function reopenCases() {
+            var idList = checkSelectedItems();
+            if (idList === "") {
+                window.alert("please selected badcase at first!");
+            } else {
+                window.alert("selected items:" + idList);
+            }
         }
         function checkSelectedItems() {
+            var result = "";
+            var inputs = document.all.tags("input");
+            for (var i = 0; i < inputs.length; i++) {
+                if (inputs[i].type === "checkbox" && inputs[i].checked) {
+                    result += inputs[i].value + ","
+                }
+            }
+            return result;
         }
   </script>
   <div id="wrap">
@@ -70,13 +90,13 @@
             </script>
         </div>
         <div>
-            <table border='1' width='80%'>
+            <table border='1' width='90%'>
                 <tr>
-                    <th width='5%'></th>
+                    <th width='2%'></th>
                     <th width='30%'>Url</th>
-                    <th width='25%'>Description</th>
-                    <th width='17%'>CreateTime</th>
-                    <th width='17%'>UpdateTime</th>
+                    <th width='23%'>Description</th>
+                    <th width='20%'>CreateTime</th>
+                    <th width='20%'>UpdateTime</th>
                     <th width='5%'>Status</th>
                 </tr>
                 <script language="JavaScript">
@@ -89,7 +109,8 @@
                         } else {
                             document.write("<tr>");
                         }
-                        document.writeln("<td><input type='checkbox' id='modifySelected'/></td><td>" + item["url"] + "</td><td>" + item["description"]
+                        document.writeln("<td><input type='checkbox' id='modifySelected' value='" + item["id"] + "' /></td>"
+                                + "<td>" + item["url"] + "</td><td>" + item["description"]
                                 + "</td><td>" + item["createTime"] + "</td><td>" + item["updateTime"]
                                 + "</td><td>" + item["status"] + "</td></tr>");
                     }

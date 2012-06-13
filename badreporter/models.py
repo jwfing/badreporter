@@ -43,7 +43,7 @@ class BadCase(Base):
         idString = ('"' + str(self.id) + '"') if (self.id) else "\"\""
         statusString = ('"' + str(self.status) + '"') if self.status else "\"\""
         descString = ('"' + str(self.description) + '"') if self.description else "\"\""
-        return "{\"url\":" + urlString + ", \"description\":" + descString \
+        return "{\"id\":" + idString + ", \"url\":" + urlString + ", \"description\":" + descString \
                 + ", \"createTime\":" +  createString \
                 + ", \"updateTime\":" + updateString \
                 + ", \"status\":"+ statusString + "}"
