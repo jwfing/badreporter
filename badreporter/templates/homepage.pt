@@ -1,13 +1,10 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" xmlns:tal="http://xml.zope.org/namespaces/tal">
 <head>
-  <title>Fetcher BadCase Aggregator</title>
+  <title>Fetcher BadCase AggPlatform</title>
   <meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/>
   <link rel="shortcut icon" href="${request.static_url('badreporter:static/favicon.ico')}" />
   <link rel="stylesheet" href="${request.static_url('badreporter:static/pylons.css')}" type="text/css" media="screen" charset="utf-8" />
-  <!--[if lte IE 6]>
-  <link rel="stylesheet" href="${request.static_url('badreporter:static/ie6.css')}" type="text/css" media="screen" charset="utf-8" />
-  <![endif]-->
 </head>
 <body>
     <script language="JavaScript">
@@ -15,7 +12,7 @@
         var resultLen = badcases.length;
         var offset = ${offset};
         var limit = ${limit};
-        var status;
+        var status = ${status};
         function refresh() {
             status = document.getElementById('caseType').value;
             var newUrl = "/?offset=" + offset + "&limit=" + limit + "&status=" + status;
@@ -39,7 +36,7 @@
             if (idList === "") {
                 window.alert("please selected badcase at first!");
             } else {
-                window.alert("selected items:" + idList);
+                window.location.href="/modify?op=close&id=" + idList;
             }
         }
         function reopenCases() {
@@ -47,7 +44,7 @@
             if (idList === "") {
                 window.alert("please selected badcase at first!");
             } else {
-                window.alert("selected items:" + idList);
+                window.location.href="/modify?op=open&id=" + idList;
             }
         }
         function checkSelectedItems() {
@@ -64,8 +61,8 @@
   <div id="wrap">
     <div id="top">
       <div class="align-left">
-        <div><img src="${request.static_url('badreporter:static/avos.gif')}" width="240" height="70" alt="pyramid"/>
-         Welcome to <span class="app-name">BadCase Reporter Platform</span></div>
+        <div><img src="${request.static_url('badreporter:static/avos.gif')}" width="120" height="35" alt="AVOS"/>
+         Welcome to <span class="app-name">Fetcher BadCase AggPlatform</span></div>
       </div>
     </div>
     <div id="bottom">
@@ -77,9 +74,21 @@
         <div id="right" class="align-left">
             <div id="toolbar">
             <select id="caseType">
-                <option value="all">All</option>
-                <option value="A">Active</option>
-                <option value="C">Closed</option>
+                <script language="JavaScript">
+                    if (status === 'A') {
+                        document.writeln('<option value="all">All</option>');
+                        document.writeln('<option value="A" selected>Active</option>');
+                        document.writeln('<option value="C">Closed</option>');
+                    } else if (status === 'C') {
+                        document.writeln('<option value="all">All</option>');
+                        document.writeln('<option value="A" >Active</option>');
+                        document.writeln('<option value="C" selected>Closed</option>');
+                    } else {
+                        document.writeln('<option value="all" selected>All</option>');
+                        document.writeln('<option value="A" >Active</option>');
+                        document.writeln('<option value="C">Closed</option>');
+                    }
+                </script>
             </select>
             <button type="button" onclick="JavaScript:refresh()">Refresh</button>
 
@@ -109,7 +118,7 @@
                 <script language="JavaScript">
                     var badcase;
                     for (i = 0; i < resultLen; i++) {
-                        badcase = badcases.pop(0);
+                        badcase = badcases[i];
                         item = JSON.parse(badcase);
                         if ((i % 2) === 0) {
                             document.write("<tr bgcolor='silver'>");
@@ -129,7 +138,7 @@
     </div>
   </div>
   <div id="footer">
-    <div class="footer">&copy; Copyright 2008-2011, Agendaless Consulting.</div>
+    <div class="footer">&copy; Copyright 2008-2013, AVOS System Inc.</div>
   </div>
 </body>
 </html>

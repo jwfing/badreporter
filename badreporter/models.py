@@ -19,6 +19,20 @@ from zope.sqlalchemy import ZopeTransactionExtension
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
+htmlCodes = [
+        ['&', '&amp;'],
+        ['<', '&lt;'],
+        ['>', '&gt;'],
+        ['"', '&quot;'],
+        ['\r', ''],
+        ['\n', ''],
+        ]
+
+def htmlEncode(s, codes=htmlCodes):
+    for code in codes:
+        s = s.replace(code[0], code[1])
+    return s
+
 class BadCase(Base):
     __tablename__ = 'av_badcases'
     id = Column(Integer, primary_key=True)
@@ -41,7 +55,7 @@ class BadCase(Base):
         updateString = ('"' + str(self.updateTime) + '"') if (self.updateTime) else "\"\""
         idString = ('"' + str(self.id) + '"') if (self.id) else "\"\""
         statusString = ('"' + str(self.status) + '"') if self.status else "\"\""
-        descString = ('"' + str(self.description) + '"') if self.description else "\"\""
+        descString = ('"' + htmlEncode(str(self.description)) + '"') if self.description else "\"\""
         return "{\"id\":" + idString + ", \"url\":" + urlString + ", \"description\":" + descString \
                 + ", \"createTime\":" +  createString \
                 + ", \"updateTime\":" + updateString \
@@ -67,11 +81,11 @@ def closeCase(id):
     case = getCaseById(id)
     if case:
         case.status = 'C'
-        DBSession.save(case)
+        DBSession.merge(case)
 
 def reopenCase(id):
     case = getCaseById(id)
     if case:
         case.status = 'A'
-        DBSession.save(case)
+        DBSession.merge(case)
 

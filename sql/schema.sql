@@ -5,5 +5,6 @@ CREATE TABLE IF NOT EXISTS av_badcases(
     status varchar(1) DEFAULT 'A',
     createTime DateTime,
     updateTime DateTime,
-    PRIMARY KEY (id)
+    PRIMARY KEY (id),
+    KEY url_idx (url)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;
